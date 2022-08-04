@@ -35,10 +35,14 @@ while user_mode != "1" or user_mode != "2" or user_mode != "3":
 
         if user_input == answer:
             print("\033[1;32mThat's Correct!\033[0;0m")
-            print("Type 'q' and press enter to return to the main menu.\n")
+            input("Type 'q' and press enter to return to the main menu.\n")
+
+            cls()
         else:
             print("\033[1;31mNice try! The correct answer is: \033[0;0m" + answer)
-            print("Type 'q' and press enter to return to the main menu.\n")
+            input("Type 'q' and press enter to return to the main menu.\n")
+
+            cls()
 
         if user_input == "q":
             break
@@ -56,10 +60,14 @@ while user_mode != "1" or user_mode != "2" or user_mode != "3":
 
         if user_input == number:
             print("\033[1;32mThat's Correct!\033[0;0m")
-            print("Type 'q' and press enter to return to the main menu.\n")
+            input("Type 'q' and press enter to return to the main menu.\n")
+
+            cls()
         else:
             print("\033[1;31mNice try! The correct answer is: \033[0;0m" + str(number))
-            print("Type 'q' and press enter to return to the main menu.\n")
+            input("Type 'q' and press enter to return to the main menu.\n")
+
+            cls()
 
         if user_input == "q":
             break

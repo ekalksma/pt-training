@@ -2,19 +2,20 @@ from tkinter import *
 from tkinter import ttk
 import random
 import os
+import time
 from turtle import left
 
 fname = "data/numbers.csv"
 data = ""
 user_mode = "0"
 min = -1
-max = 10001
+max = 1000
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
 try:
-    with open(fname, "r") as f:
+    with open(fname, "r", encoding="utf-8") as f:
         data = f.read()
 except Exception as e:
     raise ValueError(f"Unable to read file {fname}") from e
@@ -35,17 +36,17 @@ y = (screen_height/2) - (root_height/2)
  
 root.geometry('%dx%d+%d+%d' % (root_width, root_height, x, y))
 
-root_label = Label(root, text= "Portuguese Training App", font=('Helvetica 15 bold'))
-root_label.pack()
-root_label2 = Label(root, text= "What would you like to practice?", font=('Helvetica 10'))
-root_label2.pack(pady=20)
+root_label = Label(root, text= "Portuguese Training App", font=('Helvetica 15 bold')).pack()
+root_label2 = Label(root, text= "What would you like to practice?", font=('Helvetica 10')).pack(pady=20)
 
-num_button = ttk.Button(root, text="Numbers", command=lambda: create_num_win())
-num_button.pack(pady=20)
+num_button = ttk.Button(root, text="Numbers", command=lambda: create_num_win()).pack(pady=20)
 
 # Numbers Window 
 num_win = Toplevel(root)
 num_win.withdraw()
+
+number = random.randint(min, max)
+answer = data[number]
 
 num_win_width = 600 
 num_win_height = 300 
@@ -55,13 +56,11 @@ num_win.geometry('%dx%d+%d+%d' % (root_width, root_height, x, y))
 num_winlabel1 = Label(num_win, text= "Numbers", font=('Helvetica 15 bold'))
 num_winlabel1.pack()
 
-input_min = Entry(num_win, width= 5)
-input_max = Entry(num_win, width= 5)
-input_min.pack()
-input_max.pack()
+input_min = Entry(num_win, width= 5).pack()
+input_max = Entry(num_win, width= 5).pack()
 
-input = Entry(num_win)
-input.pack()
+label_question = Label(num_win, text="What is " + str(number) + " in Portuguese?", font=('Helvetica 10')).pack()
+input_text = Entry(num_win).pack(pady=5)
 
 num_back_button = ttk.Button(num_win, text="back", command=lambda: close_num_win())
 num_back_button.pack()
@@ -74,7 +73,25 @@ def close_num_win():
    num_win.withdraw()
    root.deiconify()
 
-num_win.mainloop()
+def update_number():
+    global number 
+    global answer
+    number =  random.randint(min, max)  
+    answer = data[number]
+    label_question.config(text="What is " + str(number) + " in Portuguese?", fg="black", font=('Helvetica 10'))
+
+def hit_return(event):
+    if input_text.get().strip() == answer:
+        label_question.config(text="Correct", fg="green")
+        num_win.after(1000, update_number)
+    else:
+        print(answer)
+        label_question.config(text=answer, font=('Helvetica 10'), fg="red")
+        label_question.after(5000, update_number)
+
+num_win.bind('<Return>', hit_return)
+    
+root.mainloop()
 
 # while user_mode != "1" or user_mode != "2" or user_mode != "3":
 #     cls()

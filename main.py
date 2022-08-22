@@ -8,8 +8,6 @@ from turtle import left
 fname = "data/numbers.csv"
 data = ""
 user_mode = "0"
-min = -1
-max = 1000
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -44,12 +42,12 @@ root_label2.pack(pady=20)
 num_button = ttk.Button(root, text="Numbers", command=lambda: create_num_win())
 num_button.pack(pady=20)
 
+quit_root_button = ttk.Button(root, text="quit", command=lambda: quit())
+quit_root_button.pack()
+
 # Numbers Window 
 num_win = Toplevel(root)
 num_win.withdraw()
-
-number = random.randint(min, max)
-answer = data[number]
 
 num_win_width = 600 
 num_win_height = 300 
@@ -59,18 +57,36 @@ num_win.geometry('%dx%d+%d+%d' % (root_width, root_height, x, y))
 num_winlabel1 = Label(num_win, text= "Numbers", font=('Helvetica 15 bold'))
 num_winlabel1.pack()
 
+min_label = Label(num_win, text= "min", font=('Helvetica 10'))
+min_label.pack()
 input_min = Entry(num_win, width= 5)
-input_max = Entry(num_win, width= 5)
+input_min.insert(0,"-1")
 input_min.pack()
-input_max.pack()
+
+max_label = Label(num_win, text= "max", font=('Helvetica 10'))
+max_label.pack()
+input_max = Entry(num_win, width= 5)
+input_max.insert(0,"10000")
+input_max.pack(pady=5)
+
+min = int(input_min.get())
+max = int(input_max.get())
+number = random.randint(min, max)
+answer = data[number]
 
 label_question = Label(num_win, text="What is " + str(number) + " in Portuguese?", font=('Helvetica 10'))
 label_question.pack()
-input_text = Entry(num_win)
+input_text = Entry(num_win, width=50)
 input_text.pack(pady=5)
 
 num_back_button = ttk.Button(num_win, text="back", command=lambda: close_num_win())
-num_back_button.pack()
+num_back_button.pack(pady=10)
+
+quit_num_button = ttk.Button(num_win, text="quit", command=lambda: quit())
+quit_num_button.pack()
+
+def quit():
+    root.destroy()
 
 def create_num_win():
     root.withdraw()
@@ -83,10 +99,25 @@ def close_num_win():
 def update_number():
     global number 
     global answer
+
+    min = input_min.get()
+    max = input_max.get()
+
+    if min.isnumeric() and max.isnumeric():
+        min = int(min)
+        if min < -1 or min > 10000:
+            min = -1
+        max = int(max)
+        if max > 10000 or max < -1:
+            max = 10000
+    else:
+        min = -1
+        max = 10000
+
     number =  random.randint(min, max)
-    
     answer = data[number]
     label_question.config(text="What is " + str(number) + " in Portuguese?", fg="black", font=('Helvetica 10'))
+    input_text.delete(0,'end')
 
 def hit_return(event):
     if input_text.get().strip() == answer:
@@ -95,7 +126,7 @@ def hit_return(event):
     else:
         print(answer)
         label_question.config(text=answer, font=('Helvetica 10'), fg="red")
-        label_question.after(5000, update_number)
+        label_question.after(4000, update_number)
 
 num_win.bind('<Return>', hit_return)
     

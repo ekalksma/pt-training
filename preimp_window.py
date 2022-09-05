@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import random
 
-class PresenteWindow(tk.Toplevel):
+class PreteritoImperfeitoWindow(tk.Toplevel):
     def __init__(self, parent):
         super().__init__(parent)
 
@@ -17,7 +17,7 @@ class PresenteWindow(tk.Toplevel):
         
         self.geometry('%dx%d+%d+%d' % (self.width, self.height, self.x, self.y))
 
-        self.label1 = tk.Label(self, text= "Presente", font=('Helvetica 15 bold'))
+        self.label1 = tk.Label(self, text= "Pretérito Imperfeito (I used to...)", font=('Helvetica 15 bold'))
         self.label1.pack()
 
         self.verb_label = tk.Label(self, font=('Helvetica 12 bold'))
@@ -95,7 +95,7 @@ class PresenteWindow(tk.Toplevel):
         self.input_text.delete(0,'end')
 
     def get_verbs(self):
-        fname = "data/presente.txt"
+        fname = "data/pretimp.txt"
         data = ""
 
         try:

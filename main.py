@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from num_win import NumbersWindow
 from pre_window import PresenteWindow
+from preimp_window import PreteritoImperfeitoWindow
 
 class App(tk.Tk):
     def __init__(self):
@@ -31,7 +32,7 @@ class App(tk.Tk):
         presente_button = ttk.Button(self, text="Presente", command=self.open_presente)
         presente_button.pack(pady=10)
 
-        preimp_button = ttk.Button(self, text="Préterito Imperfeito", command=self.open_presente)
+        preimp_button = ttk.Button(self, text="Préterito Imperfeito", command=self.open_preimp)
         preimp_button.pack(pady=10)
 
         self.quit_button = ttk.Button(self, text="quit", command=self.quit)
@@ -49,7 +50,11 @@ class App(tk.Tk):
         self.withdraw()
 
     def open_presente(self):
-        self.test = PresenteWindow(self)
+        self.presente = PresenteWindow(self)
+        self.withdraw()
+
+    def open_preimp(self):
+        self.presente = PreteritoImperfeitoWindow(self)
         self.withdraw()
 
 if __name__ == "__main__":

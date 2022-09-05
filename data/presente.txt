@@ -1,3 +1,5 @@
 ser,sou,és,é,somos,sois,são
 ir,vou,vais,vai,vamos,ides,vão
+vir,venho,vens,vem,vimos,vindes,vêm
+ver,vejo,vês,vê,vemos,vedes,veem
 estar,estou,estás,está,estamos,estais,estão

@@ -1,3 +1,5 @@
 ser,era,eras,era,éramos,éreis,eram
 ir,ia,ias,ia,íamos,íeis,iam
+vir,vinha,vinhas,vinha,vínhamos,vínheis,vinham
+ver,via,vias,via,víamos,víeis,viam
 estar,estava,estavas,estava,estávamos,estáveis,estavam

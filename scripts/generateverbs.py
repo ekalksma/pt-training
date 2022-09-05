@@ -27,7 +27,7 @@ def write_to_file(start, end, filename, links,verb):
    f.close()
 
 def get_verbs():
-        fname = "verbs.txt"
+        fname = "../data/verbs.txt"
         data = ""
 
         try:
@@ -47,9 +47,9 @@ for verb in verbs:
    verb = soup.find('h1', class_='nmt')
    verb = verb.text[6:].lower()
 
-   write_to_file(2,8,"test.txt",links,verb)
+   write_to_file(2,8,"../data/presente.txt",links,verb)
 
-   write_to_file(8,14,"pretimp.txt",links,verb)
+   write_to_file(8,14,"../data/pretimp.txt",links,verb)
 
 # write_to_file(14,20)
 

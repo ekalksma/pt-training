@@ -1,0 +1,3 @@
+ser,era,eras,era,éramos,éreis,eram
+ir,ia,ias,ia,íamos,íeis,iam
+estar,estava,estavas,estava,estávamos,estáveis,estavam

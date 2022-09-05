@@ -1,0 +1,3 @@
+ser,sou,és,é,somos,sois,são
+ir,vou,vais,vai,vamos,ides,vão
+estar,estou,estás,está,estamos,estais,estão

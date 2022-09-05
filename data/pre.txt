@@ -1,0 +1,6 @@
+sei,know
+sabe,knows
+sabemos,know
+sabem,know
+
+test

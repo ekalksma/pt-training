@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from num_win import NumbersWindow
+from pre_window import VerbWindow
 
 class App(tk.Tk):
     def __init__(self):
@@ -25,13 +26,17 @@ class App(tk.Tk):
         self.label2.pack(pady=20)
 
         num_button = ttk.Button(self, text="Numbers", command=self.open_numbers)
-        num_button.pack(pady=20)
+        num_button.pack(pady=10)
+
+        num_button = ttk.Button(self, text="Test", command=self.open_verb)
+        num_button.pack(pady=10)
 
         self.quit_button = ttk.Button(self, text="quit", command=self.quit)
-        self.quit_button.pack()
+        self.quit_button.pack(pady=10)
 
         self.num_win = NumbersWindow(self)
         self.num_win.withdraw()
+
 
     def quit(self):
         self.destroy()
@@ -39,6 +44,10 @@ class App(tk.Tk):
     def open_numbers(self):
         self.num_win.deiconify()
         self.withdraw()
+
+    def open_verb(self):
+        self.test = VerbWindow(self)
+        self.num_win.withdraw()
 
 if __name__ == "__main__":
     app = App()

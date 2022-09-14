@@ -3,6 +3,7 @@ from tkinter import ttk
 from num_win import NumbersWindow
 from pre_window import PresenteWindow
 from preimp_window import PreteritoImperfeitoWindow
+from futuro_win import FuturoWindow
 
 class App(tk.Tk):
     def __init__(self):
@@ -11,7 +12,7 @@ class App(tk.Tk):
         self.title('app')
 
         self.width = 600 
-        self.height = 300 
+        self.height = 400
         self.screen_width = self.winfo_screenwidth()  # Width of the screen
         self.screen_height = self.winfo_screenheight() # Height of the screen
         
@@ -35,6 +36,9 @@ class App(tk.Tk):
         preimp_button = ttk.Button(self, text="Préterito Imperfeito", command=self.open_preimp)
         preimp_button.pack(pady=10)
 
+        futuro_button = ttk.Button(self, text="Futuro", command=self.open_futuro)
+        futuro_button.pack(pady=10)
+
         self.quit_button = ttk.Button(self, text="quit", command=self.quit)
         self.quit_button.pack(pady=10)
 
@@ -55,6 +59,10 @@ class App(tk.Tk):
 
     def open_preimp(self):
         self.presente = PreteritoImperfeitoWindow(self)
+        self.withdraw()
+    
+    def open_futuro(self):
+        self.presente = FuturoWindow(self)
         self.withdraw()
 
 if __name__ == "__main__":

@@ -3,3 +3,17 @@ ir,iria,irias,iria,iríamos,iríeis,iriam,vá,vás
 vir,viria,virias,viria,viríamos,viríeis,viriam,venha,venhas
 ver,veria,verias,veria,veríamos,veríeis,veriam,veja,vejas
 estar,estaria,estarias,estaria,estaríamos,estaríeis,estariam,esteja,estejas
+poder,poderia,poderias,poderia,poderíamos,poderíeis,poderiam,possa,possas
+comer,comeria,comerias,comeria,comeríamos,comeríeis,comeriam,coma,comas
+trazer,traria,trarias,traria,traríamos,traríeis,trariam,traga,tragas
+sair,sairia,sairias,sairia,sairíamos,sairíeis,sairiam,saia,saias
+dar,daria,darias,daria,daríamos,daríeis,dariam,dê,dês
+querer,quereria,quererias,quereria,quereríamos,quereríeis,quereriam,queira,queiras
+estudar,estudaria,estudarias,estudaria,estudaríamos,estudaríeis,estudariam,estude,estudes
+ler,leria,lerias,leria,leríamos,leríeis,leriam,leia,leias
+fazer,faria,farias,faria,faríamos,faríeis,fariam,faça,faças
+estar,estaria,estarias,estaria,estaríamos,estaríeis,estariam,esteja,estejas
+haver,haveria,haverias,haveria,haveríamos,haveríeis,haveriam,haja,hajas
+partir,partiria,partirias,partiria,partiríamos,partiríeis,partiriam,parta,partas
+cantar,cantaria,cantarias,cantaria,cantaríamos,cantaríeis,cantariam,cante,cantes
+saber,saberia,saberias,saberia,saberíamos,saberíeis,saberiam,saiba,saibas

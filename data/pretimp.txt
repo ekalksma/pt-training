@@ -3,3 +3,17 @@ ir,ia,ias,ia,íamos,íeis,iam
 vir,vinha,vinhas,vinha,vínhamos,vínheis,vinham
 ver,via,vias,via,víamos,víeis,viam
 estar,estava,estavas,estava,estávamos,estáveis,estavam
+poder,podia,podias,podia,podíamos,podíeis,podiam
+comer,comia,comias,comia,comíamos,comíeis,comiam
+trazer,trazia,trazias,trazia,trazíamos,trazíeis,traziam
+sair,saía,saías,saía,saíamos,saíeis,saíam
+dar,dava,davas,dava,dávamos,dáveis,davam
+querer,queria,querias,queria,queríamos,queríeis,queriam
+estudar,estudava,estudavas,estudava,estudávamos,estudáveis,estudavam
+ler,lia,lias,lia,líamos,líeis,liam
+fazer,fazia,fazias,fazia,fazíamos,fazíeis,faziam
+estar,estava,estavas,estava,estávamos,estáveis,estavam
+haver,havia,havias,havia,havíamos,havíeis,haviam
+partir,partia,partias,partia,partíamos,partíeis,partiam
+cantar,cantava,cantavas,cantava,cantávamos,cantáveis,cantavam
+saber,sabia,sabias,sabia,sabíamos,sabíeis,sabiam

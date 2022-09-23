@@ -4,6 +4,7 @@ from num_win import NumbersWindow
 from pre_window import PresenteWindow
 from preimp_window import PreteritoImperfeitoWindow
 from futuro_win import FuturoWindow
+from pretperf_win import PreteritoPerfeitoWindow
 
 class App(tk.Tk):
     def __init__(self):
@@ -36,6 +37,9 @@ class App(tk.Tk):
         preimp_button = ttk.Button(self, text="Préterito Imperfeito", command=self.open_preimp)
         preimp_button.pack(pady=10)
 
+        futuro_button = ttk.Button(self, text="Préterito Perfeito", command=self.open_pretperf)
+        futuro_button.pack(pady=10)
+
         futuro_button = ttk.Button(self, text="Futuro", command=self.open_futuro)
         futuro_button.pack(pady=10)
 
@@ -55,6 +59,10 @@ class App(tk.Tk):
 
     def open_presente(self):
         self.presente = PresenteWindow(self)
+        self.withdraw()
+    
+    def open_pretperf(self):
+        self.presente = PreteritoPerfeitoWindow(self)
         self.withdraw()
 
     def open_preimp(self):

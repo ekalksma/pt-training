@@ -3,3 +3,17 @@ ir,vou,vais,vai,vamos,ides,vão
 vir,venho,vens,vem,vimos,vindes,vêm
 ver,vejo,vês,vê,vemos,vedes,veem
 estar,estou,estás,está,estamos,estais,estão
+poder,posso,podes,pode,podemos,podeis,podem
+comer,como,comes,come,comemos,comeis,comem
+trazer,trago,trazes,traz,trazemos,trazeis,trazem
+sair,saio,sais,sai,saímos,saís,saem
+dar,dou,dás,dá,damos,dais,dão
+querer,quero,queres,quer,queremos,quereis,querem
+estudar,estudo,estudas,estuda,estudamos,estudais,estudam
+ler,leio,lês,lê,lemos,ledes,leem
+fazer,faço,fazes,faz,fazemos,fazeis,fazem
+estar,estou,estás,está,estamos,estais,estão
+haver,hei,hás,há,havemos,haveis,hão
+partir,parto,partes,parte,partimos,partis,partem
+cantar,canto,cantas,canta,cantamos,cantais,cantam
+saber,sei,sabes,sabe,sabemos,sabeis,sabem

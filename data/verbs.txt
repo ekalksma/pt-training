@@ -3,3 +3,17 @@ ir
 vir
 ver
 estar
+poder
+comer
+trazer
+sair
+dar
+querer
+estudar
+ler
+fazer
+estar
+haver
+partir
+cantar
+saber

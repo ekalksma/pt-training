@@ -51,9 +51,10 @@ for verb in verbs:
 
    write_to_file(8,14,"../data/pretimp.txt",links,verb)
 
-   write_to_file(32,40,"../data/futuro.txt",links,verb)
+   write_to_file(14,20,"../data/preperf.txt",links,verb)
 
-# write_to_file(14,20)
+   write_to_file(32,40,"../data/futuro.txt",links,verb)
+   
 
 # write_to_file(20,26)
 

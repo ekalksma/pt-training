@@ -2,27 +2,27 @@ import requests
 from bs4 import BeautifulSoup
 from os import path
 
-def write_to_file(start, end, filename, links,verb):
+def write_to_file(form_index, filename, links,verb):
    file_exists = path.exists(filename)
+   offset = 2
    if not file_exists:
       f = open(filename, 'w')
       f.write(f'{verb},')
 
-      for i in range(start, end):
-         if i == end-1:
-            f.write(links[i].text) 
-         else:
-            f.write(f'{links[i].text},') 
+      f.write(f'{links[offset + (6 * form_index)].text},')
+      f.write(f'{links[offset + 2 + (6 * form_index)].text},')
+      f.write(f'{links[offset + 3 + (6 * form_index)].text},')
+      f.write(f'{links[offset + 5 + (6 * form_index)].text}')
+
    else:
       f = open(filename, 'a')
       f.write('\n')
       f.write(f'{verb},')
 
-      for i in range(start, end):
-         if i == end-1:
-            f.write(links[i].text) 
-         else:
-            f.write(f'{links[i].text},') 
+      f.write(f'{links[offset + (6 * form_index)].text},')
+      f.write(f'{links[offset + 2 + (6 * form_index)].text},')
+      f.write(f'{links[offset + 3 + (6 * form_index)].text},')
+      f.write(f'{links[offset + 5 + (6 * form_index)].text}')
 
    f.close()
 
@@ -47,13 +47,13 @@ for verb in verbs:
    verb = soup.find('h1', class_='nmt')
    verb = verb.text[6:].lower()
 
-   write_to_file(2,8,"../data/presente.txt",links,verb)
+   write_to_file(0,"../data/presente.txt",links,verb)
 
-   write_to_file(8,14,"../data/pretimp.txt",links,verb)
+   write_to_file(1,"../data/pretimp.txt",links,verb)
 
-   write_to_file(14,20,"../data/preperf.txt",links,verb)
+   write_to_file(2,"../data/preperf.txt",links,verb)
 
-   write_to_file(32,40,"../data/futuro.txt",links,verb)
+   write_to_file(8,"../data/futuro.txt",links,verb)
    
 
 # write_to_file(20,26)

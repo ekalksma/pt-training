@@ -58,14 +58,10 @@ class FuturoWindow(tk.Toplevel):
             case 1:
                 self.label_question.config(text=f"quando eu:", fg="black")
             case 2:
-                self.label_question.config(text=f"quando tu:", fg="black")
-            case 3:
                 self.label_question.config(text=f"quando ele/ela:", fg="black")
-            case 4:
+            case 3:
                 self.label_question.config(text=f"quando nós:", fg="black")
-            case 5:
-                self.label_question.config(text=f"quando vós:", fg="black")
-            case 6:
+            case 4:
                 self.label_question.config(text=f"quando eles/elas:", fg="black")
 
     def keypress_return(self, event):
@@ -78,7 +74,7 @@ class FuturoWindow(tk.Toplevel):
 
     def update_answer(self):
         self.form_index +=1
-        if self.form_index > 6:
+        if self.form_index > 4:
             del self.verbs[self.verb_index]
             if not self.verbs:
                 self.verbs = self.get_verbs()

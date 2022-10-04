@@ -5,6 +5,7 @@ from pre_window import PresenteWindow
 from preimp_window import PreteritoImperfeitoWindow
 from futuro_win import FuturoWindow
 from pretperf_win import PreteritoPerfeitoWindow
+from futpret_win import FuturoDoPreteritoWindow
 
 class App(tk.Tk):
     def __init__(self):
@@ -40,8 +41,11 @@ class App(tk.Tk):
         futuro_button = ttk.Button(self, text="Préterito Perfeito", command=self.open_pretperf)
         futuro_button.pack(pady=10)
 
-        futuro_button = ttk.Button(self, text="Futuro", command=self.open_futuro)
+        futuro_button = ttk.Button(self, text="Subjuntivo Futuro", command=self.open_futuro)
         futuro_button.pack(pady=10)
+
+        futpret_button = ttk.Button(self, text="Futuro do Pretérito", command=self.open_futpret)
+        futpret_button.pack(pady=10)
 
         self.quit_button = ttk.Button(self, text="quit", command=self.quit)
         self.quit_button.pack(pady=10)
@@ -71,6 +75,10 @@ class App(tk.Tk):
     
     def open_futuro(self):
         self.presente = FuturoWindow(self)
+        self.withdraw()
+
+    def open_futpret(self):
+        self.presente = FuturoDoPreteritoWindow(self)
         self.withdraw()
 
 if __name__ == "__main__":

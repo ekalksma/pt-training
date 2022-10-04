@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import random
 
-class PreteritoImperfeitoWindow(tk.Toplevel):
+class FuturoDoPreteritoWindow(tk.Toplevel):
     def __init__(self, parent):
         super().__init__(parent)
 
@@ -14,13 +14,10 @@ class PreteritoImperfeitoWindow(tk.Toplevel):
 
         self.x = (self.screen_width/2) - (self.width/2)
         self.y = (self.screen_height/2) - (self.height/2) 
-
-        self.correct = 0
-        self.incorrect = 0
         
         self.geometry('%dx%d+%d+%d' % (self.width, self.height, self.x, self.y))
 
-        self.label1 = tk.Label(self, text= "Pretérito Imperfeito (I used to...)", font=('Helvetica 15 bold'))
+        self.label1 = tk.Label(self, text= "Futuro do Pretérito (I would)", font=('Helvetica 15 bold'))
         self.label1.pack()
 
         self.verb_label = tk.Label(self, font=('Helvetica 12 bold'))
@@ -31,12 +28,6 @@ class PreteritoImperfeitoWindow(tk.Toplevel):
 
         self.input_text = tk.Entry(self, width=50)
         self.input_text.pack(pady=5)
-
-        self.correct_label = tk.Label(self, text=f'Correct: {self.correct}', font=('Helvetica 10'), fg="green")
-        self.correct_label.pack()
-
-        self.incorrect_label = tk.Label(self, text=f'Incorrect: {self.incorrect}', font=('Helvetica 10'), fg="red")
-        self.incorrect_label.pack()
 
         self.num_back_button = ttk.Button(self, text="back", command=lambda: self.back(parent))
         self.num_back_button.pack(pady=10)
@@ -75,13 +66,9 @@ class PreteritoImperfeitoWindow(tk.Toplevel):
 
     def keypress_return(self, event):
         if self.input_text.get().strip() == self.answer:
-            self.correct += 1
             self.label_question.config(text="Correct", fg="green")
-            self.correct_label.config(text=f'Correct: {self.correct}')
             self.after(1000, self.update_answer)
         else:
-            self.incorrect += 1
-            self.incorrect_label.config(text=f'Incorrect: {self.incorrect}')
             self.label_question.config(text=self.answer, font=('Helvetica 10'), fg="red")
             self.label_question.after(1500, self.update_answer)
 
@@ -104,7 +91,7 @@ class PreteritoImperfeitoWindow(tk.Toplevel):
         self.input_text.delete(0,'end')
 
     def get_verbs(self):
-        fname = "data/pretimp.txt"
+        fname = "data/futpret.txt"
         data = ""
 
         try:

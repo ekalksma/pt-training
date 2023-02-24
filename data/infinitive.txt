@@ -1,0 +1,4 @@
+caminhar = to walk
+correr = to run
+estar = to be
+fazer = to do

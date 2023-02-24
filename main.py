@@ -6,6 +6,7 @@ from preimp_window import PreteritoImperfeitoWindow
 from futuro_win import FuturoWindow
 from pretperf_win import PreteritoPerfeitoWindow
 from futpret_win import FuturoDoPreteritoWindow
+from infinitive_win import InfinitiveWindow
 
 class App(tk.Tk):
     def __init__(self):
@@ -47,6 +48,9 @@ class App(tk.Tk):
         futpret_button = ttk.Button(self, text="Futuro do Pretérito", command=self.open_futpret)
         futpret_button.pack(pady=10)
 
+        futpret_button = ttk.Button(self, text="Infinitive", command=self.open_infinitive)
+        futpret_button.pack(pady=10)
+
         self.quit_button = ttk.Button(self, text="quit", command=self.quit)
         self.quit_button.pack(pady=10)
 
@@ -79,6 +83,10 @@ class App(tk.Tk):
 
     def open_futpret(self):
         self.presente = FuturoDoPreteritoWindow(self)
+        self.withdraw()
+    
+    def open_infinitive(self):
+        self.presente = InfinitiveWindow(self)
         self.withdraw()
 
 if __name__ == "__main__":

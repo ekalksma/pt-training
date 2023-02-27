@@ -1,4 +1,5 @@
 caminhar = to walk
 correr = to run
-estar = to be
+estar = to be (temporary)
+ser = to be (permanent)
 fazer = to do

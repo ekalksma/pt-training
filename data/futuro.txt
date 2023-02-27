@@ -1,3 +1,1 @@
-ser,for,for,formos,forem
-estar,estiver,estiver,estivermos,estiverem
 ter,tiver,tiver,tivermos,tiverem

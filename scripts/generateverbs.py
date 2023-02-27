@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from os import path
 from os import remove
+import time
 
 def write_to_file(form_index, filename, links,verb):
    file_exists = path.exists(filename)
@@ -39,35 +40,43 @@ def get_verbs():
         
         return data.splitlines()
 
-if path.exists("../data/presente.txt"):
-    remove("../data/presente.txt")
-if path.exists("../data/pretimp.txt"):
-    remove("../data/pretimp.txt")
-if path.exists("../data/preperf.txt"):
-    remove("../data/preperf.txt")
-if path.exists("../data/futpret.txt"):
-    remove("../data/futpret.txt")
-if path.exists("../data/futuro.txt"):
-    remove("../data/futuro.txt")
-    
-verbs = get_verbs()
+def generate_verbs():
+    if path.exists("../data/presente.txt"):
+        remove("../data/presente.txt")
+    if path.exists("../data/pretimp.txt"):
+        remove("../data/pretimp.txt")
+    if path.exists("../data/preperf.txt"):
+        remove("../data/preperf.txt")
+    if path.exists("../data/futpret.txt"):
+        remove("../data/futpret.txt")
+    if path.exists("../data/futuro.txt"):
+        remove("../data/futuro.txt")
+        
+    verbs = get_verbs()
 
-for verb in verbs:
-   r = requests.get(f'https://www.conjugacao.com.br/{verb}')
-   soup = BeautifulSoup(r.text.encode('utf-8'), 'html.parser')
-   links = soup.findAll('span', class_='f')
-   verb = soup.find('h1', class_='nmt')
-   verb = verb.text[6:].lower()
+    for verb in verbs:
+        r = requests.get(f'https://www.conjugacao.com.br/{verb}')
+        soup = BeautifulSoup(r.text.encode('utf-8'), 'html.parser')
+        links = soup.findAll('span', class_='f')
+        verb = soup.find('h1', class_='nmt')
+        verb = verb.text[6:].lower()
 
-   write_to_file(0,"../data/presente.txt",links,verb)
+    write_to_file(0,"../data/presente.txt",links,verb)
 
-   write_to_file(1,"../data/pretimp.txt",links,verb)
+    write_to_file(1,"../data/pretimp.txt",links,verb)
 
-   write_to_file(2,"../data/preperf.txt",links,verb)
+    write_to_file(2,"../data/preperf.txt",links,verb)
 
-   write_to_file(5,"../data/futpret.txt",links,verb)
+    write_to_file(5,"../data/futpret.txt",links,verb)
 
-   write_to_file(8,"../data/futuro.txt",links,verb)
+    write_to_file(8,"../data/futuro.txt",links,verb)
+
+if __name__ == '__main__':
+    t1 = time.time()
+    generate_verbs()
+
+    result = time.time() - t1
+    print(result)
    
 
 # write_to_file(20,26)

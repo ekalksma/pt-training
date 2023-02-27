@@ -1,3 +1,1 @@
-ser,fui,foi,fomos,foram
-estar,estive,esteve,estivemos,estiveram
 ter,tive,teve,tivemos,tiveram

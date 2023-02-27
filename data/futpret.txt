@@ -1,3 +1,1 @@
-ser,seria,seria,seríamos,seriam
-estar,estaria,estaria,estaríamos,estariam
 ter,teria,teria,teríamos,teriam

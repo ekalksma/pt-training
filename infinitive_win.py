@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import random
+import glob, os
 
 class InfinitiveWindow(tk.Toplevel):
     def __init__(self, parent):
@@ -23,11 +24,29 @@ class InfinitiveWindow(tk.Toplevel):
         self.label1 = tk.Label(self, text= "Infinitive", font=('Helvetica 15 bold'))
         self.label1.pack()
 
+        self.options = []
+
+        self.dir_path = "./data/vocab_lists"
+
+        for file in os.listdir(self.dir_path):
+            # check only text files
+            if file.endswith('.txt'):
+                self.options.append(file)
+
+        self.selected = tk.StringVar()
+  
+        # initial menu text
+        self.selected.set(self.options[0])
+        self.selected.trace("w", self.callback)
+  
+        drop = tk.OptionMenu(self , self.selected , *self.options)
+        drop.pack()
+
         self.label_question = tk.Label(self, font=('Helvetica 12'))
         self.label_question.pack()
 
         self.input_text = tk.Entry(self, width=50)
-        self.input_text.pack(pady=5)
+        self.input_text.pack(pady=5)    
 
         self.correct_label = tk.Label(self, text=f'Correct: {self.correct}', font=('Helvetica 10'), fg="green")
         self.correct_label.pack()
@@ -41,7 +60,10 @@ class InfinitiveWindow(tk.Toplevel):
         self.quit_num_button = ttk.Button(self, text="quit", command=parent.destroy)
         self.quit_num_button.pack()
 
-        self.verbs = self.get_verbs()
+        self.current_file = "verbos.txt"
+        self.verbs = self.get_verbs(self.current_file)
+        self.num_of_words = 10
+        self.verbs = self.verbs[0:self.num_of_words]
         self.redo_list = []
         self.min = 0
         self.max = len(self.verbs) - 1
@@ -53,6 +75,27 @@ class InfinitiveWindow(tk.Toplevel):
         
         self.update_form_label()
         self.bind('<Return>', self.keypress_return)
+
+    def callback(*args):
+        args[0].current_file = args[0].selected.get()
+        args[0].verbs = args[0].get_verbs(args[0].current_file)
+
+        args[0].min = 0
+        args[0].max = len(args[0].verbs) - 1
+
+        args[0].verb_index = random.randint(args[0].min, args[0].max)
+        args[0].verb = args[0].verbs[args[0].verb_index].split('=')
+
+        args[0].answer = args[0].verb[0].lower()
+        
+        args[0].update_form_label()
+
+        args[0].correct = 0
+        args[0].correct_label.config(text=f'Correct: {args[0].correct}')
+
+        args[0].incorrect = 0
+        args[0].incorrect_label.config(text=f'Incorrect: {args[0].incorrect}')
+
 
     def back (self, parent):
         self.destroy()
@@ -87,7 +130,8 @@ class InfinitiveWindow(tk.Toplevel):
                 self.update_form_label()
                 self.input_text.delete(0,'end')
             else:
-                self.verbs = self.get_verbs()
+                self.verbs = self.get_verbs(self.current_file)
+                self.verbs = self.verbs[0:self.num_of_words]
                 self.verb_index = random.randint(self.min, len(self.verbs) - 1)
                 self.verb = self.verbs[self.verb_index].split('=')
                 self.answer = self.verb[0].lower()
@@ -104,8 +148,8 @@ class InfinitiveWindow(tk.Toplevel):
             self.input_text.delete(0,'end')
 
 
-    def get_verbs(self):
-        fname = "data/infinitive.txt"
+    def get_verbs(self, filename):
+        fname = f"data/vocab_lists/{filename}"
         data = ""
 
         try:

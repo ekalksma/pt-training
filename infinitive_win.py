@@ -49,7 +49,7 @@ class InfinitiveWindow(tk.Toplevel):
         self.verb_index = random.randint(self.min, self.max)
         self.verb = self.verbs[self.verb_index].split('=')
 
-        self.answer = self.verb[0]
+        self.answer = self.verb[0].lower()
         
         self.update_form_label()
         self.bind('<Return>', self.keypress_return)
@@ -59,10 +59,11 @@ class InfinitiveWindow(tk.Toplevel):
         parent.deiconify()
     
     def update_form_label(self):
+        print(self.verb)
         self.label_question.config(text=self.verb[1], fg="black", font=('Helvetica 12'))
 
     def keypress_return(self, event):
-        if self.input_text.get().strip() == self.answer.strip():
+        if self.input_text.get().strip().lower() == self.answer.strip():
             self.correct += 1
             self.label_question.config(text="Correct", font=('Helvetica 12') ,fg="green")
             self.correct_label.config(text=f'Correct: {self.correct}')
@@ -80,7 +81,7 @@ class InfinitiveWindow(tk.Toplevel):
             if self.redo_list:
                 self.verb_index = random.randint(self.min, len(self.redo_list) - 1)
                 self.verb = self.redo_list[self.verb_index]
-                self.answer = self.verb[0]
+                self.answer = self.verb[0].lower()
                 self.redo_list.remove(self.verb)
 
                 self.update_form_label()
@@ -89,7 +90,7 @@ class InfinitiveWindow(tk.Toplevel):
                 self.verbs = self.get_verbs()
                 self.verb_index = random.randint(self.min, len(self.verbs) - 1)
                 self.verb = self.verbs[self.verb_index].split('=')
-                self.answer = self.verb[0]
+                self.answer = self.verb[0].lower()
 
                 self.update_form_label()
                 self.input_text.delete(0,'end')
@@ -97,7 +98,7 @@ class InfinitiveWindow(tk.Toplevel):
         else:
             self.verb_index = random.randint(self.min, len(self.verbs) - 1)
             self.verb = self.verbs[self.verb_index].split('=')
-            self.answer = self.verb[0]
+            self.answer = self.verb[0].lower()
 
             self.update_form_label()
             self.input_text.delete(0,'end')

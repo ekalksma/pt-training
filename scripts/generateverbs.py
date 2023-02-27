@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from os import path
 from os import remove
 import time
+import threading
 
 def write_to_file(form_index, filename, links,verb):
    file_exists = path.exists(filename)
@@ -61,6 +62,8 @@ def generate_verbs():
         verb = soup.find('h1', class_='nmt')
         verb = verb.text[6:].lower()
 
+    start = time.time()
+
     write_to_file(0,"../data/presente.txt",links,verb)
 
     write_to_file(1,"../data/pretimp.txt",links,verb)
@@ -71,12 +74,28 @@ def generate_verbs():
 
     write_to_file(8,"../data/futuro.txt",links,verb)
 
-if __name__ == '__main__':
-    t1 = time.time()
-    generate_verbs()
+    # t1 = threading.Thread(target=write_to_file, args=(0,"../data/presente.txt",links,verb,))
+    # t2 = threading.Thread(target=write_to_file, args=(1,"../data/pretimp.txt",links,verb,))
+    # t3 = threading.Thread(target=write_to_file, args=(2,"../data/preperf.txt",links,verb,))
+    # t4 = threading.Thread(target=write_to_file, args=(5,"../data/futpret.txt",links,verb,))
+    # t5 = threading.Thread(target=write_to_file, args=(8,"../data/futuro.txt",links,verb,))
 
-    result = time.time() - t1
+    # t1.start()
+    # t2.start()
+    # t3.start()
+    # t4.start()
+    # t5.start()
+    # t1.join()
+    # t2.join()
+    # t3.join()
+    # t4.join()
+    # t5.join()
+
+    result = time.time() - start
     print(result)
+
+if __name__ == '__main__':
+    generate_verbs()
    
 
 # write_to_file(20,26)

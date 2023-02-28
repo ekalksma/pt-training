@@ -3,7 +3,7 @@ ten_to_nineteen = ["dez", "onze", "doze", "treze", "quatorze", "quinze", "dezess
 tens = ["vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"]
 hundreds = ["cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"]
 
-f = open("../data/numbers.csv", "w")
+f = open("../data/numbers.csv", "w", encoding='utf-8')
 f.write("zero,")
 
 # Write 1-9 to file

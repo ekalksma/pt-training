@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import random
-import glob, os
+import os
 
 class InfinitiveWindow(tk.Toplevel):
     def __init__(self, parent):
@@ -21,12 +21,13 @@ class InfinitiveWindow(tk.Toplevel):
         
         self.geometry('%dx%d+%d+%d' % (self.width, self.height, self.x, self.y))
 
-        self.label1 = tk.Label(self, text= "Infinitive", font=('Helvetica 15 bold'))
+        self.label1 = tk.Label(self, text= "Vocabulary", font=('Helvetica 15 bold'))
         self.label1.pack()
 
         self.options = []
 
         self.dir_path = "./data/vocab_lists"
+        self.current_file = "verbos.txt"
 
         for file in os.listdir(self.dir_path):
             # check only text files
@@ -36,7 +37,7 @@ class InfinitiveWindow(tk.Toplevel):
         self.selected = tk.StringVar()
   
         # initial menu text
-        self.selected.set(self.options[0])
+        self.selected.set(self.current_file)
         self.selected.trace("w", self.callback)
   
         drop = tk.OptionMenu(self , self.selected , *self.options)
@@ -60,7 +61,6 @@ class InfinitiveWindow(tk.Toplevel):
         self.quit_num_button = ttk.Button(self, text="quit", command=parent.destroy)
         self.quit_num_button.pack()
 
-        self.current_file = "verbos.txt"
         self.verbs = self.get_verbs(self.current_file)
         self.num_of_words = 10
         self.verbs = self.verbs[0:self.num_of_words]

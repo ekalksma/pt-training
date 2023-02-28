@@ -9,7 +9,7 @@ def write_to_file(form_index, filename, links,verb):
    file_exists = path.exists(filename)
    offset = 2
    if not file_exists:
-      f = open(filename, 'w')
+      f = open(filename, 'w', encoding='utf-8')
       f.write(f'{verb},')
 
       f.write(f'{links[offset + (6 * form_index)].text},')
@@ -18,7 +18,7 @@ def write_to_file(form_index, filename, links,verb):
       f.write(f'{links[offset + 5 + (6 * form_index)].text}')
 
    else:
-      f = open(filename, 'a')
+      f = open(filename, 'a', encoding='utf-8')
       f.write('\n')
       f.write(f'{verb},')
 
@@ -30,7 +30,7 @@ def write_to_file(form_index, filename, links,verb):
    f.close()
 
 def get_verbs():
-        fname = "../data/verbs.txt"
+        fname = "../data/vocab_lists/verbos2.txt"
         data = ""
 
         try:
@@ -55,41 +55,60 @@ def generate_verbs():
         
     verbs = get_verbs()
 
-    for verb in verbs:
-        r = requests.get(f'https://www.conjugacao.com.br/{verb}')
+    for line in verbs:
+        verb = line.split('=')
+        r = requests.get(f'https://www.conjugacao.com.br/{verb[0]}')
         soup = BeautifulSoup(r.text.encode('utf-8'), 'html.parser')
         links = soup.findAll('span', class_='f')
         verb = soup.find('h1', class_='nmt')
+        print(verb)
         verb = verb.text[6:].lower()
+
+        t1 = threading.Thread(target=write_to_file, args=(0,"../data/presente.txt",links,verb,))
+        t2 = threading.Thread(target=write_to_file, args=(1,"../data/pretimp.txt",links,verb,))
+        t3 = threading.Thread(target=write_to_file, args=(2,"../data/preperf.txt",links,verb,))
+        t4 = threading.Thread(target=write_to_file, args=(5,"../data/futpret.txt",links,verb,))
+        t5 = threading.Thread(target=write_to_file, args=(8,"../data/futuro.txt",links,verb,))
+
+        t1.start()
+        t2.start()
+        t3.start()
+        t4.start()
+        t5.start()
+        t1.join()
+        t2.join()
+        t3.join()
+        t4.join()
+        t5.join()
 
     start = time.time()
 
-    write_to_file(0,"../data/presente.txt",links,verb)
+    # write_to_file(0,"../data/presente.txt",links,verb)
 
-    write_to_file(1,"../data/pretimp.txt",links,verb)
+    # write_to_file(1,"../data/pretimp.txt",links,verb)
 
-    write_to_file(2,"../data/preperf.txt",links,verb)
+    # write_to_file(2,"../data/preperf.txt",links,verb)
 
-    write_to_file(5,"../data/futpret.txt",links,verb)
+    # write_to_file(5,"../data/futpret.txt",links,verb)
 
-    write_to_file(8,"../data/futuro.txt",links,verb)
+    # write_to_file(8,"../data/futuro.txt",links,verb)
 
-    # t1 = threading.Thread(target=write_to_file, args=(0,"../data/presente.txt",links,verb,))
-    # t2 = threading.Thread(target=write_to_file, args=(1,"../data/pretimp.txt",links,verb,))
-    # t3 = threading.Thread(target=write_to_file, args=(2,"../data/preperf.txt",links,verb,))
-    # t4 = threading.Thread(target=write_to_file, args=(5,"../data/futpret.txt",links,verb,))
-    # t5 = threading.Thread(target=write_to_file, args=(8,"../data/futuro.txt",links,verb,))
+    t1 = threading.Thread(target=write_to_file, args=(0,"../data/presente.txt",links,verb,))
+    t2 = threading.Thread(target=write_to_file, args=(1,"../data/pretimp.txt",links,verb,))
+    t3 = threading.Thread(target=write_to_file, args=(2,"../data/preperf.txt",links,verb,))
+    t4 = threading.Thread(target=write_to_file, args=(5,"../data/futpret.txt",links,verb,))
+    t5 = threading.Thread(target=write_to_file, args=(8,"../data/futuro.txt",links,verb,))
 
-    # t1.start()
-    # t2.start()
-    # t3.start()
-    # t4.start()
-    # t5.start()
-    # t1.join()
-    # t2.join()
-    # t3.join()
-    # t4.join()
-    # t5.join()
+    t1.start()
+    t2.start()
+    t3.start()
+    t4.start()
+    t5.start()
+    t1.join()
+    t2.join()
+    t3.join()
+    t4.join()
+    t5.join()
 
     result = time.time() - start
     print(result)

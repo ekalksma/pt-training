@@ -15,7 +15,7 @@ class App(tk.Tk):
         self.title('app')
 
         self.width = 600 
-        self.height = 400
+        self.height = 500
         self.screen_width = self.winfo_screenwidth()  # Width of the screen
         self.screen_height = self.winfo_screenheight() # Height of the screen
         
@@ -48,7 +48,7 @@ class App(tk.Tk):
         futpret_button = ttk.Button(self, text="Futuro do Pretérito", command=self.open_futpret)
         futpret_button.pack(pady=10)
 
-        futpret_button = ttk.Button(self, text="Infinitive", command=self.open_infinitive)
+        futpret_button = ttk.Button(self, text="Vocabulary", command=self.open_infinitive)
         futpret_button.pack(pady=10)
 
         self.quit_button = ttk.Button(self, text="quit", command=self.quit)

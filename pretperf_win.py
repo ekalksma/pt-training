@@ -104,7 +104,7 @@ class PreteritoPerfeitoWindow(tk.Toplevel):
         self.input_text.delete(0,'end')
 
     def get_verbs(self):
-        fname = "data/preperf.txt"
+        fname = "data/indi_preperf.txt"
         data = ""
 
         try:

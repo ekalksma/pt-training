@@ -42,16 +42,16 @@ def get_verbs():
         return data.splitlines()
 
 def generate_verbs():
-    if path.exists("../data/presente.txt"):
-        remove("../data/presente.txt")
-    if path.exists("../data/pretimp.txt"):
-        remove("../data/pretimp.txt")
-    if path.exists("../data/preperf.txt"):
-        remove("../data/preperf.txt")
-    if path.exists("../data/futpret.txt"):
-        remove("../data/futpret.txt")
-    if path.exists("../data/futuro.txt"):
-        remove("../data/futuro.txt")
+    if path.exists("../data/indi_presente.txt"):
+        remove("../data/indi_presente.txt")
+    if path.exists("../data/indi_preimp.txt"):
+        remove("../data/indi_preimp.txt")
+    if path.exists("../data/indi_preperf.txt"):
+        remove("../data/indi_preperf.txt")
+    if path.exists("../data/indi_futpret.txt"):
+        remove("../data/indi_futpret.txt")
+    if path.exists("../data/sub_futuro.txt"):
+        remove("../data/sub_futuro.txt")
         
     verbs = get_verbs()
 
@@ -64,11 +64,11 @@ def generate_verbs():
         print(verb)
         verb = verb.text[6:].lower()
 
-        t1 = threading.Thread(target=write_to_file, args=(0,"../data/presente.txt",links,verb,))
-        t2 = threading.Thread(target=write_to_file, args=(1,"../data/pretimp.txt",links,verb,))
-        t3 = threading.Thread(target=write_to_file, args=(2,"../data/preperf.txt",links,verb,))
-        t4 = threading.Thread(target=write_to_file, args=(5,"../data/futpret.txt",links,verb,))
-        t5 = threading.Thread(target=write_to_file, args=(8,"../data/futuro.txt",links,verb,))
+        t1 = threading.Thread(target=write_to_file, args=(0,"../data/indi_presente.txt",links,verb,))
+        t2 = threading.Thread(target=write_to_file, args=(1,"../data/indi_preimp.txt",links,verb,))
+        t3 = threading.Thread(target=write_to_file, args=(2,"../data/indi_preperf.txt",links,verb,))
+        t4 = threading.Thread(target=write_to_file, args=(5,"../data/indi_futpret.txt",links,verb,))
+        t5 = threading.Thread(target=write_to_file, args=(8,"../data/sub_futuro.txt",links,verb,))
 
         t1.start()
         t2.start()

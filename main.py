@@ -15,7 +15,7 @@ class App(tk.Tk):
         self.title('app')
 
         self.width = 600 
-        self.height = 500
+        self.height = 550
         self.screen_width = self.winfo_screenwidth()  # Width of the screen
         self.screen_height = self.winfo_screenheight() # Height of the screen
         
@@ -31,7 +31,11 @@ class App(tk.Tk):
         self.label2.pack(pady=20)
 
         num_button = ttk.Button(self, text="Numbers", command=self.open_numbers)
-        num_button.pack(pady=10)
+        num_button.pack(pady=5)
+
+        self.indi_label = tk.Label(self, text= "Indicativo", font=('Helvetica 15'))
+        self.indi_label.pack(pady=5)
+
 
         presente_button = ttk.Button(self, text="Presente", command=self.open_presente)
         presente_button.pack(pady=10)
@@ -42,11 +46,15 @@ class App(tk.Tk):
         futuro_button = ttk.Button(self, text="Préterito Perfeito", command=self.open_pretperf)
         futuro_button.pack(pady=10)
 
+        futpret_button = ttk.Button(self, text="Futuro do Pretérito", command=self.open_futpret)
+        futpret_button.pack(pady=10)
+
+        self.sub_label = tk.Label(self, text= "Subjuntivo", font=('Helvetica 15'))
+        self.sub_label.pack(pady=5)
+
         futuro_button = ttk.Button(self, text="Subjuntivo Futuro", command=self.open_futuro)
         futuro_button.pack(pady=10)
 
-        futpret_button = ttk.Button(self, text="Futuro do Pretérito", command=self.open_futpret)
-        futpret_button.pack(pady=10)
 
         futpret_button = ttk.Button(self, text="Vocabulary", command=self.open_infinitive)
         futpret_button.pack(pady=10)

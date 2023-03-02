@@ -104,7 +104,7 @@ class PreteritoImperfeitoWindow(tk.Toplevel):
         self.input_text.delete(0,'end')
 
     def get_verbs(self):
-        fname = "data/pretimp.txt"
+        fname = "data/indi_preimp.txt"
         data = ""
 
         try:

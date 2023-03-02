@@ -104,7 +104,7 @@ class FuturoDoPreteritoWindow(tk.Toplevel):
         self.input_text.delete(0,'end')
 
     def get_verbs(self):
-        fname = "data/futpret.txt"
+        fname = "data/indi_futpret.txt"
         data = ""
 
         try:

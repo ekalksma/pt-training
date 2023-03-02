@@ -9,7 +9,7 @@ def write_to_file(form_index, filename, links,verb):
    file_exists = path.exists(filename)
    offset = 2
    if not file_exists:
-      f = open(filename, 'w', encoding='utf-8')
+      f = open(filename, 'w',)
       f.write(f'{verb},')
 
       f.write(f'{links[offset + (6 * form_index)].text},')
@@ -18,7 +18,7 @@ def write_to_file(form_index, filename, links,verb):
       f.write(f'{links[offset + 5 + (6 * form_index)].text}')
 
    else:
-      f = open(filename, 'a', encoding='utf-8')
+      f = open(filename, 'a',)
       f.write('\n')
       f.write(f'{verb},')
 

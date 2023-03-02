@@ -50,8 +50,11 @@ def generate_verbs():
         remove("../data/indi_preperf.txt")
     if path.exists("../data/indi_futpret.txt"):
         remove("../data/indi_futpret.txt")
+    if path.exists("../data/sub_preimp.txt"):
+        remove("../data/sub_preimp.txt")
     if path.exists("../data/sub_futuro.txt"):
         remove("../data/sub_futuro.txt")
+    
         
     verbs = get_verbs()
 
@@ -68,18 +71,21 @@ def generate_verbs():
         t2 = threading.Thread(target=write_to_file, args=(1,"../data/indi_preimp.txt",links,verb,))
         t3 = threading.Thread(target=write_to_file, args=(2,"../data/indi_preperf.txt",links,verb,))
         t4 = threading.Thread(target=write_to_file, args=(5,"../data/indi_futpret.txt",links,verb,))
-        t5 = threading.Thread(target=write_to_file, args=(8,"../data/sub_futuro.txt",links,verb,))
+        t5 = threading.Thread(target=write_to_file, args=(7,"../data/sub_preimp.txt",links,verb,))
+        t6 = threading.Thread(target=write_to_file, args=(8,"../data/sub_futuro.txt",links,verb,))
 
         t1.start()
         t2.start()
         t3.start()
         t4.start()
         t5.start()
+        t6.start()
         t1.join()
         t2.join()
         t3.join()
         t4.join()
         t5.join()
+        t6.join()
 
     start = time.time()
 
@@ -120,5 +126,3 @@ if __name__ == '__main__':
 # write_to_file(20,26)
 
 # write_to_file(26,32)
-
-

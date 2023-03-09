@@ -2,12 +2,15 @@ import tkinter as tk
 from tkinter import ttk
 import random
 
-class PresenteWindow(tk.Toplevel):
-    def __init__(self, parent):
+class ConjugationWindow(tk.Toplevel):
+    def __init__(self, parent, filename, title):
         super().__init__(parent)
 
         self.width = 600 
         self.height = 300
+        
+        self.filename = filename
+        # self.title = title
 
         self.screen_width = self.winfo_screenwidth()  # Width of the screen
         self.screen_height = self.winfo_screenheight() # Height of the screen
@@ -20,10 +23,13 @@ class PresenteWindow(tk.Toplevel):
         
         self.geometry('%dx%d+%d+%d' % (self.width, self.height, self.x, self.y))
 
-        self.label1 = tk.Label(self, text= "Presente", font=('Helvetica 15 bold'))
-        self.label1.pack()
+        self.label1 = tk.Label(self, text= title, font=('Helvetica 15 bold'),bg="red")
+        self.label1.pack(fill="x")
 
-        self.verb_label = tk.Label(self, font=('Helvetica 12 bold'))
+        # self.listbox = tk.Listbox(self)
+        # self.listbox.pack(side="left")
+
+        self.verb_label = tk.Label(self, font=('Helvetica 12 bold'), bg="blue")
         self.verb_label.pack()
 
         self.label_question = tk.Label(self, font=('Helvetica 10'))
@@ -53,6 +59,10 @@ class PresenteWindow(tk.Toplevel):
 
         self.form_index = 1
         self.answer = self.verb[self.form_index]
+
+        # for i in range(self.max):
+        #     self.test = self.verbs[i].split(",")
+        #     self.listbox.insert(i, self.test[0])
         
         self.verb_label.config(text=f"Verb: {self.verb[0]}")
         self.update_form_label()
@@ -104,7 +114,7 @@ class PresenteWindow(tk.Toplevel):
         self.input_text.delete(0,'end')
 
     def get_verbs(self):
-        fname = "data/indi_presente.txt"
+        fname = f"data/{self.filename}"
         data = ""
 
         try:

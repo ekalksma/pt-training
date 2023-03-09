@@ -21,7 +21,7 @@ achar,achei,achou,achamos,acharam
 dobrar,dobrei,dobrou,dobramos,dobraram
 embrulhar,embrulhei,embrulhou,embrulhamos,embrulharam
 significar,signifiquei,significou,significamos,significaram
-trair,traÃ­,traiu,traÃ­mos,traÃ­ram
+trair,traí,traiu,traímos,traíram
 vencer,venci,venceu,vencemos,venceram
 perder,perdi,perdeu,perdemos,perderam
 desenhar,desenhei,desenhou,desenhamos,desenharam
@@ -105,8 +105,8 @@ derrubar,derrubei,derrubou,derrubamos,derrubaram
 derramar,derramei,derramou,derramamos,derramaram
 reclamar,reclamei,reclamou,reclamamos,reclamaram
 botar,botei,botou,botamos,botaram
-pã´r,pus,pÃ´s,pusemos,puseram
-destruir,destruÃ­,destruiu,destruÃ­mos,destruÃ­ram
+p�r,pus,pôs,pusemos,puseram
+destruir,destruí,destruiu,destruímos,destruíram
 identificar,identifiquei,identificou,identificamos,identificaram
 embaralhar,embaralhei,embaralhou,embaralhamos,embaralharam
 derreter,derreti,derreteu,derretemos,derreteram
@@ -134,7 +134,7 @@ esconder,escondi,escondeu,escondemos,esconderam
 martelar,martelei,martelou,martelamos,martelaram
 desconfiar,desconfiei,desconfiou,desconfiamos,desconfiaram
 aumentar,aumentei,aumentou,aumentamos,aumentaram
-diminuir,diminuÃ­,diminuiu,diminuÃ­mos,diminuÃ­ram
+diminuir,diminuí,diminuiu,diminuímos,diminuíram
 pisar,pisei,pisou,pisamos,pisaram
 alagar,alaguei,alagou,alagamos,alagaram
 incendiar,incendiei,incendiou,incendiamos,incendiaram
@@ -172,5 +172,4 @@ aprovar,aprovei,aprovou,aprovamos,aprovaram
 seguir,segui,seguiu,seguimos,seguiram
 anotar,anotei,anotou,anotamos,anotaram
 ralar,ralei,ralou,ralamos,ralaram
-escorregar,escorreguei,escorregou,escorregamos,escorregaram
 escorregar,escorreguei,escorregou,escorregamos,escorregaram

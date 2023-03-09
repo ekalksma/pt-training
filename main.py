@@ -1,11 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from num_win import NumbersWindow
-from pre_window import PresenteWindow
-from preimp_window import PreteritoImperfeitoWindow
-from futuro_win import FuturoWindow
-from pretperf_win import PreteritoPerfeitoWindow
-from futpret_win import FuturoDoPreteritoWindow
+from conjugation_win import ConjugationWindow
 from infinitive_win import InfinitiveWindow
 
 class App(tk.Tk):
@@ -37,24 +33,26 @@ class App(tk.Tk):
         self.indi_label.pack(pady=5)
 
 
-        presente_button = ttk.Button(self, text="Presente", command=self.open_presente)
+        presente_button = ttk.Button(self, text="Presente", command=lambda: self.open_conjugation_win("indi_presente.txt", "Presente"))
         presente_button.pack(pady=10)
 
-        preimp_button = ttk.Button(self, text="Préterito Imperfeito", command=self.open_preimp)
+        preimp_button = ttk.Button(self, text="Préterito Imperfeito", command=lambda: self.open_conjugation_win("indi_preimp.txt", "Préterito Imperfeito"))
         preimp_button.pack(pady=10)
 
-        futuro_button = ttk.Button(self, text="Préterito Perfeito", command=self.open_pretperf)
+        futuro_button = ttk.Button(self, text="Préterito Perfeito", command=lambda: self.open_conjugation_win("indi_preperf.txt", "Préterito Perfeito"))
         futuro_button.pack(pady=10)
 
-        futpret_button = ttk.Button(self, text="Futuro do Pretérito", command=self.open_futpret)
+        futpret_button = ttk.Button(self, text="Futuro do Pretérito", command=lambda: self.open_conjugation_win("indi_futpret.txt", "Futuro do Pretérito"))
         futpret_button.pack(pady=10)
 
         self.sub_label = tk.Label(self, text= "Subjuntivo", font=('Helvetica 15'))
         self.sub_label.pack(pady=5)
 
-        futuro_button = ttk.Button(self, text="Subjuntivo Futuro", command=self.open_futuro)
-        futuro_button.pack(pady=10)
+        sub_preimp_button = ttk.Button(self, text="Subjuntivo Préterito Imperfeito", command=lambda: self.open_conjugation_win("sub_preimp.txt", "Subjuntivo Préterito Imperfeito"))
+        sub_preimp_button.pack(pady=10)
 
+        sub_futuro_button = ttk.Button(self, text="Subjuntivo Futuro", command=lambda: self.open_conjugation_win("sub_futuro.txt", "Futuro do Pretérito"))
+        sub_futuro_button.pack(pady=10)
 
         futpret_button = ttk.Button(self, text="Vocabulary", command=self.open_infinitive)
         futpret_button.pack(pady=10)
@@ -73,24 +71,8 @@ class App(tk.Tk):
         self.num_win.deiconify()
         self.withdraw()
 
-    def open_presente(self):
-        self.presente = PresenteWindow(self)
-        self.withdraw()
-    
-    def open_pretperf(self):
-        self.presente = PreteritoPerfeitoWindow(self)
-        self.withdraw()
-
-    def open_preimp(self):
-        self.presente = PreteritoImperfeitoWindow(self)
-        self.withdraw()
-    
-    def open_futuro(self):
-        self.presente = FuturoWindow(self)
-        self.withdraw()
-
-    def open_futpret(self):
-        self.presente = FuturoDoPreteritoWindow(self)
+    def open_conjugation_win(self, filename, titel):
+        self.presente = ConjugationWindow(self,filename, titel)
         self.withdraw()
     
     def open_infinitive(self):

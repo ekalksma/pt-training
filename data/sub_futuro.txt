@@ -21,7 +21,7 @@ achar,achar,achar,acharmos,acharem
 dobrar,dobrar,dobrar,dobrarmos,dobrarem
 embrulhar,embrulhar,embrulhar,embrulharmos,embrulharem
 significar,significar,significar,significarmos,significarem
-trair,trair,trair,trairmos,traÃ­rem
+trair,trair,trair,trairmos,traírem
 vencer,vencer,vencer,vencermos,vencerem
 perder,perder,perder,perdermos,perderem
 desenhar,desenhar,desenhar,desenharmos,desenharem
@@ -105,8 +105,8 @@ derrubar,derrubar,derrubar,derrubarmos,derrubarem
 derramar,derramar,derramar,derramarmos,derramarem
 reclamar,reclamar,reclamar,reclamarmos,reclamarem
 botar,botar,botar,botarmos,botarem
-pã´r,puser,puser,pusermos,puserem
-destruir,destruir,destruir,destruirmos,destruÃ­rem
+p�r,puser,puser,pusermos,puserem
+destruir,destruir,destruir,destruirmos,destruírem
 identificar,identificar,identificar,identificarmos,identificarem
 embaralhar,embaralhar,embaralhar,embaralharmos,embaralharem
 derreter,derreter,derreter,derretermos,derreterem
@@ -134,7 +134,7 @@ esconder,esconder,esconder,escondermos,esconderem
 martelar,martelar,martelar,martelarmos,martelarem
 desconfiar,desconfiar,desconfiar,desconfiarmos,desconfiarem
 aumentar,aumentar,aumentar,aumentarmos,aumentarem
-diminuir,diminuir,diminuir,diminuirmos,diminuÃ­rem
+diminuir,diminuir,diminuir,diminuirmos,diminuírem
 pisar,pisar,pisar,pisarmos,pisarem
 alagar,alagar,alagar,alagarmos,alagarem
 incendiar,incendiar,incendiar,incendiarmos,incendiarem
@@ -172,5 +172,4 @@ aprovar,aprovar,aprovar,aprovarmos,aprovarem
 seguir,seguir,seguir,seguirmos,seguirem
 anotar,anotar,anotar,anotarmos,anotarem
 ralar,ralar,ralar,ralarmos,ralarem
-escorregar,escorregar,escorregar,escorregarmos,escorregarem
 escorregar,escorregar,escorregar,escorregarmos,escorregarem

@@ -10,7 +10,6 @@ class ConjugationWindow(tk.Toplevel):
         self.height = 300
         
         self.filename = filename
-        # self.title = title
 
         self.screen_width = self.winfo_screenwidth()  # Width of the screen
         self.screen_height = self.winfo_screenheight() # Height of the screen
@@ -63,16 +62,13 @@ class ConjugationWindow(tk.Toplevel):
         self.min = 0
         self.max = len(self.verbs) - 1
 
-        # self.verb_index = random.randint(self.min, self.max)
         self.verb = random.choice(list(self.verbs.keys()))
 
         self.form_index = 0
-        self.listbox_index = 0
         self.answer = self.verbs[self.verb][self.form_index]
 
         for verb in self.verbs:
-            self.listbox.insert(self.listbox_index, verb)
-            self.listbox_index += 1
+            self.listbox.insert("end", verb)
         
         self.verb_label.config(text=f"Verb: {self.verb}")
         self.update_form_label()
@@ -112,20 +108,22 @@ class ConjugationWindow(tk.Toplevel):
             if not self.verbs:
                 self.verbs = self.get_verbs()
 
-            # self.verb_index = random.randint(self.min, len(self.verbs) - 1)
             self.verb = random.choice(list(self.verbs.keys()))
             self.verb_label.config(text=f"Verb: {self.verb}")
             self.form_index = 0
             self.answer = self.verbs[self.verb][self.form_index]
         else:
-            print(self.form_index)
             self.answer = self.verbs[self.verb][self.form_index]
 
         self.update_form_label()
         self.input_text.delete(0,'end')
 
     def add_verb(self):
-        print(self.listbox.get(self.listbox.curselection()[0]))
+        index = 0
+        if self.listbox.curselection(): # if something is selected
+            for selected_item in self.listbox.curselection():
+                self.listbox2.insert("end", self.listbox.get(self.listbox.curselection()[index]))
+                index +=1
 
     def get_verbs(self):
         fname = f"data/{self.filename}"
@@ -138,6 +136,8 @@ class ConjugationWindow(tk.Toplevel):
             raise ValueError(f"Unable to read file {fname}") from e
         
         data = data.splitlines()
+        data = sorted(data)
+
         dict = {}
 
         for line in data:

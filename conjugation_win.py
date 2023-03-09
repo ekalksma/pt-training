@@ -25,16 +25,16 @@ class ConjugationWindow(tk.Toplevel):
         self.label1 = tk.Label(self, text= title, font=('Helvetica 15 bold'))
         self.label1.pack(fill="x")
 
-        self.listbox = tk.Listbox(self,selectmode="extended")
+        self.listbox = tk.Listbox(self, selectmode="extended")
         self.listbox.pack(side="left", padx=5)
 
         self.add_button = ttk.Button(self, text="Add", command=lambda: self.add_verb())
         self.add_button.pack(side="left", padx=5)
 
-        self.remove_button = ttk.Button(self, text="Remove", command=lambda: self.back(parent))
+        self.remove_button = ttk.Button(self, text="Remove", command=lambda: self.remove_verb())
         self.remove_button.pack(side="left", padx=5)
 
-        self.listbox2 = tk.Listbox(self)
+        self.listbox2 = tk.Listbox(self, selectmode="extended")
         self.listbox2.pack(side="left", padx=5)
 
         self.verb_label = tk.Label(self, font=('Helvetica 12 bold'))
@@ -124,6 +124,13 @@ class ConjugationWindow(tk.Toplevel):
             for selected_item in self.listbox.curselection():
                 self.listbox2.insert("end", self.listbox.get(self.listbox.curselection()[index]))
                 index +=1
+
+    def remove_verb(self):
+        offset = 0
+        if self.listbox2.curselection(): # if something is selected
+            for selected_item in self.listbox2.curselection():
+                self.listbox2.delete(selected_item - offset)
+                offset +=1
 
     def get_verbs(self):
         fname = f"data/{self.filename}"

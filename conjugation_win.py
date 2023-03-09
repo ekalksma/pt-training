@@ -31,6 +31,9 @@ class ConjugationWindow(tk.Toplevel):
         self.add_button = ttk.Button(self, text="Add", command=lambda: self.add_verb())
         self.add_button.pack(side="left", padx=5)
 
+        self.reload_button = ttk.Button(self, text="Reload", command=lambda: self.reload_verbs())
+        self.reload_button.pack(side="left", padx=5)
+
         self.remove_button = ttk.Button(self, text="Remove", command=lambda: self.remove_verb())
         self.remove_button.pack(side="left", padx=5)
 
@@ -59,19 +62,11 @@ class ConjugationWindow(tk.Toplevel):
         self.quit_num_button.pack()
 
         self.verbs = self.get_verbs()
-        self.min = 0
-        self.max = len(self.verbs) - 1
-
-        self.verb = random.choice(list(self.verbs.keys()))
-
-        self.form_index = 0
-        self.answer = self.verbs[self.verb][self.form_index]
 
         for verb in self.verbs:
-            self.listbox.insert("end", verb)
+            self.listbox1.insert("end", verb)
         
-        self.verb_label.config(text=f"Verb: {self.verb}")
-        self.update_form_label()
+        self.set_random_verb()
         self.bind('<Return>', self.keypress_return)
 
     def back (self, parent):
@@ -108,15 +103,20 @@ class ConjugationWindow(tk.Toplevel):
             if not self.verbs:
                 self.verbs = self.get_verbs()
 
-            self.verb = random.choice(list(self.verbs.keys()))
-            self.verb_label.config(text=f"Verb: {self.verb}")
-            self.form_index = 0
-            self.answer = self.verbs[self.verb][self.form_index]
+            self.set_random_verb()
+
         else:
             self.answer = self.verbs[self.verb][self.form_index]
+            self.update_form_label()
 
-        self.update_form_label()
         self.input_text.delete(0,'end')
+
+    def set_random_verb(self):
+        self.verb = random.choice(list(self.verbs.keys()))
+        self.form_index = 0
+        self.answer = self.verbs[self.verb][self.form_index]
+        self.verb_label.config(text=f"Verb: {self.verb}")
+        self.update_form_label()
 
     def add_verb(self):
         index = 0
@@ -131,6 +131,17 @@ class ConjugationWindow(tk.Toplevel):
             for selected_item in self.listbox2.curselection():
                 self.listbox2.delete(selected_item - offset)
                 offset +=1
+
+    def reload_verbs(self):
+        self.verbs = self.get_verbs()
+        new_verbs = {}
+        selected_verbs = self.listbox2.get(0, "end")
+
+        for verb in selected_verbs:
+            new_verbs[verb] = self.verbs[verb]
+
+        self.verbs = new_verbs
+        self.set_random_verb()
 
     def get_verbs(self):
         fname = f"data/{self.filename}"

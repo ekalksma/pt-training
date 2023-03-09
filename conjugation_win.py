@@ -6,7 +6,7 @@ class ConjugationWindow(tk.Toplevel):
     def __init__(self, parent, filename, title):
         super().__init__(parent)
 
-        self.width = 600 
+        self.width = 800
         self.height = 300
         
         self.filename = filename
@@ -23,13 +23,22 @@ class ConjugationWindow(tk.Toplevel):
         
         self.geometry('%dx%d+%d+%d' % (self.width, self.height, self.x, self.y))
 
-        self.label1 = tk.Label(self, text= title, font=('Helvetica 15 bold'),bg="red")
+        self.label1 = tk.Label(self, text= title, font=('Helvetica 15 bold'))
         self.label1.pack(fill="x")
 
-        # self.listbox = tk.Listbox(self)
-        # self.listbox.pack(side="left")
+        self.listbox = tk.Listbox(self,selectmode="extended")
+        self.listbox.pack(side="left", padx=5)
 
-        self.verb_label = tk.Label(self, font=('Helvetica 12 bold'), bg="blue")
+        self.add_button = ttk.Button(self, text="Add", command=lambda: self.add_verb())
+        self.add_button.pack(side="left", padx=5)
+
+        self.remove_button = ttk.Button(self, text="Remove", command=lambda: self.back(parent))
+        self.remove_button.pack(side="left", padx=5)
+
+        self.listbox2 = tk.Listbox(self)
+        self.listbox2.pack(side="left", padx=5)
+
+        self.verb_label = tk.Label(self, font=('Helvetica 12 bold'))
         self.verb_label.pack()
 
         self.label_question = tk.Label(self, font=('Helvetica 10'))
@@ -54,17 +63,18 @@ class ConjugationWindow(tk.Toplevel):
         self.min = 0
         self.max = len(self.verbs) - 1
 
-        self.verb_index = random.randint(self.min, self.max)
-        self.verb = self.verbs[self.verb_index].split(',')
+        # self.verb_index = random.randint(self.min, self.max)
+        self.verb = random.choice(list(self.verbs.keys()))
 
-        self.form_index = 1
-        self.answer = self.verb[self.form_index]
+        self.form_index = 0
+        self.listbox_index = 0
+        self.answer = self.verbs[self.verb][self.form_index]
 
-        # for i in range(self.max):
-        #     self.test = self.verbs[i].split(",")
-        #     self.listbox.insert(i, self.test[0])
+        for verb in self.verbs:
+            self.listbox.insert(self.listbox_index, verb)
+            self.listbox_index += 1
         
-        self.verb_label.config(text=f"Verb: {self.verb[0]}")
+        self.verb_label.config(text=f"Verb: {self.verb}")
         self.update_form_label()
         self.bind('<Return>', self.keypress_return)
 
@@ -74,13 +84,13 @@ class ConjugationWindow(tk.Toplevel):
     
     def update_form_label(self):
         match self.form_index:
-            case 1:
+            case 0:
                 self.label_question.config(text=f"eu:", fg="black")
-            case 2:
+            case 1:
                 self.label_question.config(text=f"ele/ela:", fg="black")
-            case 3:
+            case 2:
                 self.label_question.config(text=f"nós:", fg="black")
-            case 4:
+            case 3:
                 self.label_question.config(text=f"eles/elas:", fg="black")
 
     def keypress_return(self, event):
@@ -97,21 +107,25 @@ class ConjugationWindow(tk.Toplevel):
 
     def update_answer(self):
         self.form_index +=1
-        if self.form_index > 4:
-            del self.verbs[self.verb_index]
+        if self.form_index > 3:
+            del self.verbs[self.verb]
             if not self.verbs:
                 self.verbs = self.get_verbs()
 
-            self.verb_index = random.randint(self.min, len(self.verbs) - 1)
-            self.verb = self.verbs[self.verb_index].split(',')
-            self.verb_label.config(text=f"Verb: {self.verb[0]}")
-            self.form_index = 1
-            self.answer = self.verb[self.form_index]
+            # self.verb_index = random.randint(self.min, len(self.verbs) - 1)
+            self.verb = random.choice(list(self.verbs.keys()))
+            self.verb_label.config(text=f"Verb: {self.verb}")
+            self.form_index = 0
+            self.answer = self.verbs[self.verb][self.form_index]
         else:
-            self.answer = self.verb[self.form_index]
+            print(self.form_index)
+            self.answer = self.verbs[self.verb][self.form_index]
 
         self.update_form_label()
         self.input_text.delete(0,'end')
+
+    def add_verb(self):
+        print(self.listbox.get(self.listbox.curselection()[0]))
 
     def get_verbs(self):
         fname = f"data/{self.filename}"
@@ -123,4 +137,11 @@ class ConjugationWindow(tk.Toplevel):
         except Exception as e:
             raise ValueError(f"Unable to read file {fname}") from e
         
-        return data.splitlines()
+        data = data.splitlines()
+        dict = {}
+
+        for line in data:
+            line = line.split(",")
+            dict[line[0]] = line [1:]
+
+        return dict

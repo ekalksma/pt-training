@@ -11,7 +11,7 @@ class App(tk.Tk):
         self.title('app')
 
         self.width = 600 
-        self.height = 550
+        self.height = 600
         self.screen_width = self.winfo_screenwidth()  # Width of the screen
         self.screen_height = self.winfo_screenheight() # Height of the screen
         

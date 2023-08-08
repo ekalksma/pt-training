@@ -7,9 +7,16 @@ class ConjugationWindow(tk.Toplevel):
         super().__init__(parent)
 
         self.width = 800
-        self.height = 300
+        self.height = 400
         
         self.filename = filename
+
+        self.frame = tk.Frame(self)
+        self.frame.grid(row=0, column=0, sticky="NWE")
+        self.listbox_frame = tk.Frame(self.frame, pady=10)
+        self.listbox_frame.grid(row=6, column=0)
+        self.button_frame = tk.Frame(self.listbox_frame)
+        self.button_frame.grid(row=0, column=1, padx=10)
 
         self.screen_width = self.winfo_screenwidth()  # Width of the screen
         self.screen_height = self.winfo_screenheight() # Height of the screen
@@ -17,54 +24,72 @@ class ConjugationWindow(tk.Toplevel):
         self.x = (self.screen_width/2) - (self.width/2)
         self.y = (self.screen_height/2) - (self.height/2) 
 
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0,weight=1)
+        self.frame.columnconfigure(0, weight=1)
+
         self.correct = 0
         self.incorrect = 0
         
         self.geometry('%dx%d+%d+%d' % (self.width, self.height, self.x, self.y))
 
-        self.label1 = tk.Label(self, text= title, font=('Helvetica 15 bold'))
-        self.label1.pack(fill="x")
+        self.label1 = tk.Label(self.frame, text= title, font=('Helvetica 15 bold'))
+        # self.label1.pack(fill="x")
+        self.label1.grid(row=0,column=0, sticky="EW")
 
-        self.listbox = tk.Listbox(self, selectmode="extended")
-        self.listbox.pack(side="left", padx=5)
+        self.verb_label = tk.Label(self.frame, font=('Helvetica 12 bold'))
+        # self.verb_label.pack()
+        self.verb_label.grid(row=1, column=0, sticky="EW")
 
-        self.add_button = ttk.Button(self, text="Add", command=lambda: self.add_verb())
-        self.add_button.pack(side="left", padx=5)
+        self.label_question = tk.Label(self.frame, font=('Helvetica 10'))
+        # self.label_question.pack()
+        self.label_question.grid(row=2, column=0, sticky="EW")
 
-        self.reload_button = ttk.Button(self, text="Reload", command=lambda: self.reload_verbs())
-        self.reload_button.pack(side="left", padx=5)
+        self.input_text = tk.Entry(self.frame, width=50)
+        # self.input_text.pack(pady=5)
+        self.input_text.grid(row=3, column=0)
 
-        self.remove_button = ttk.Button(self, text="Remove", command=lambda: self.remove_verb())
-        self.remove_button.pack(side="left", padx=5)
+        self.correct_label = tk.Label(self.frame, text=f'Correct: {self.correct}', font=('Helvetica 10'), fg="green")
+        # self.correct_label.pack()
+        self.correct_label.grid(row=4, column=0)
 
-        self.listbox2 = tk.Listbox(self, selectmode="extended")
-        self.listbox2.pack(side="left", padx=5)
+        self.incorrect_label = tk.Label(self.frame, text=f'Incorrect: {self.incorrect}', font=('Helvetica 10'), fg="red")
+        # self.incorrect_label.pack()
+        self.incorrect_label.grid(row=5, column=0)
 
-        self.verb_label = tk.Label(self, font=('Helvetica 12 bold'))
-        self.verb_label.pack()
+        self.listbox = tk.Listbox(self.listbox_frame, selectmode="extended")
+        # self.listbox.pack(side="left", padx=5)
+        self.listbox.grid(row=0, column=0)
 
-        self.label_question = tk.Label(self, font=('Helvetica 10'))
-        self.label_question.pack()
+        self.add_button = ttk.Button(self.button_frame, text="Add", command=lambda: self.add_verb())
+        self.add_button.grid(row=0, column=0)
+        # self.add_button.pack(side="left", padx=5)
 
-        self.input_text = tk.Entry(self, width=50)
-        self.input_text.pack(pady=5)
+        self.reload_button = ttk.Button(self.button_frame, text="Reload", command=lambda: self.reload_verbs())
+        # self.reload_button.pack(side="left", padx=5)
+        self.reload_button.grid(row=2,column=0)
 
-        self.correct_label = tk.Label(self, text=f'Correct: {self.correct}', font=('Helvetica 10'), fg="green")
-        self.correct_label.pack()
+        self.remove_button = ttk.Button(self.button_frame, text="Remove", command=lambda: self.remove_verb())
+        # self.remove_button.pack(side="left", padx=5)
+        self.remove_button.grid(row=1,column=0, pady=10)
 
-        self.incorrect_label = tk.Label(self, text=f'Incorrect: {self.incorrect}', font=('Helvetica 10'), fg="red")
-        self.incorrect_label.pack()
+        self.listbox2 = tk.Listbox(self.listbox_frame, selectmode="extended")
+        # self.listbox2.pack(side="left", padx=5)
+        self.listbox2.grid(row=0,column=2)
 
-        self.num_back_button = ttk.Button(self, text="back", command=lambda: self.back(parent))
-        self.num_back_button.pack(pady=10)
+        self.num_back_button = ttk.Button(self.frame, text="back", command=lambda: self.back(parent))
+        # self.num_back_button.pack(pady=10)
+        self.num_back_button.grid(row=7, column=0,pady= 10)
 
-        self.quit_num_button = ttk.Button(self, text="quit", command=parent.destroy)
-        self.quit_num_button.pack()
+        self.quit_num_button = ttk.Button(self.frame, text="quit", command=parent.destroy)
+        self.quit_num_button.grid(row=8, column=0)
+        # self.quit_num_button.pack()
 
         self.verbs = self.get_verbs()
+        self.redo_list = []
 
         for verb in self.verbs:
-            self.listbox1.insert("end", verb)
+            self.listbox.insert("end", verb)
         
         self.set_random_verb()
         self.bind('<Return>', self.keypress_return)
@@ -89,14 +114,16 @@ class ConjugationWindow(tk.Toplevel):
             self.correct += 1
             self.label_question.config(text="Correct", fg="green")
             self.correct_label.config(text=f'Correct: {self.correct}')
-            self.after(1000, self.update_answer)
+            self.after(1000, self.update_answer, True)
         else:
             self.incorrect += 1
             self.incorrect_label.config(text=f'Incorrect: {self.incorrect}')
             self.label_question.config(text=self.answer, font=('Helvetica 10'), fg="red")
-            self.label_question.after(1500, self.update_answer)
+            self.label_question.after(1500, self.update_answer, False)
 
-    def update_answer(self):
+    def update_answer(self, is_correct):
+        if not is_correct: self.redo_list.append([self.form_index, self.verbs[self.verb]])
+        print(self.redo_list)
         self.form_index +=1
         if self.form_index > 3:
             del self.verbs[self.verb]

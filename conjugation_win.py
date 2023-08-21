@@ -86,12 +86,15 @@ class ConjugationWindow(tk.Toplevel):
         # self.quit_num_button.pack()
 
         self.verbs = self.get_verbs()
+        self.is_in_redo_list = False
+        self.verb_key = ""
         self.redo_list = []
+        self.labeltxt = ""
 
         for verb in self.verbs:
             self.listbox.insert("end", verb)
         
-        self.set_random_verb()
+        self.set_random_verb(self.verbs, False)
         self.bind('<Return>', self.keypress_return)
 
     def back (self, parent):
@@ -110,40 +113,60 @@ class ConjugationWindow(tk.Toplevel):
                 self.label_question.config(text=f"eles/elas:", fg="black")
 
     def keypress_return(self, event):
-        if self.input_text.get().strip() == self.answer:
+        if self.input_text.get().strip().lower() == self.answer:
             self.correct += 1
+            self.labeltxt = self.label_question["text"]
+            print(self.labeltxt)
             self.label_question.config(text="Correct", fg="green")
             self.correct_label.config(text=f'Correct: {self.correct}')
-            self.after(1000, self.update_answer, True)
+            self.after(1000, self.update_answer)
         else:
             self.incorrect += 1
+            self.labeltxt = self.label_question["text"]
             self.incorrect_label.config(text=f'Incorrect: {self.incorrect}')
             self.label_question.config(text=self.answer, font=('Helvetica 10'), fg="red")
-            self.label_question.after(1500, self.update_answer, False)
+            self.redo_list.append(f"{self.labeltxt} {self.answer}")
+            self.label_question.after(1500, self.update_answer)
 
-    def update_answer(self, is_correct):
-        if not is_correct: self.redo_list.append([self.form_index, self.verbs[self.verb]])
+    def update_answer(self):
+        if self.is_in_redo_list: self.redo_list.remove(f"{self.labeltxt} {self.answer}")
         print(self.redo_list)
-        self.form_index +=1
-        if self.form_index > 3:
-            del self.verbs[self.verb]
-            if not self.verbs:
-                self.verbs = self.get_verbs()
 
-            self.set_random_verb()
+        if self.verbs:
+            self.form_index +=1
+            if self.form_index > 3:
+                del self.verbs[self.verb]
+                if self.verbs:
+                    self.set_random_verb(self.verbs, self.is_in_redo_list)
+                else:
+                    self.update_answer()
+            else:
+                self.answer = self.verbs[self.verb][self.form_index]
+                self.update_form_label()
 
         else:
-            self.answer = self.verbs[self.verb][self.form_index]
-            self.update_form_label()
+            if self.redo_list:
+                self.is_in_redo_list = True
+                self.set_random_verb(self.redo_list, self.is_in_redo_list)
+            else:
+                self.is_in_redo_list = False
+                self.verbs = self.get_verbs()
+                self.set_random_verb(self.verbs, self.is_in_redo_list)
 
         self.input_text.delete(0,'end')
 
-    def set_random_verb(self):
-        self.verb = random.choice(list(self.verbs.keys()))
-        self.form_index = 0
-        self.answer = self.verbs[self.verb][self.form_index]
-        self.verb_label.config(text=f"Verb: {self.verb}")
-        self.update_form_label()
+    def set_random_verb(self, verbs ,redo_list):
+        if redo_list:
+            random_index = random.randint(0, len(verbs) - 1)
+            self.answer = verbs[random_index].split()[1]
+            self.label_question.config(text=verbs[random_index].split()[0])
+        else:
+            print(verbs)
+            self.verb = random.choice(list(verbs.keys()))
+            self.form_index = 0
+            self.answer = self.verbs[self.verb][self.form_index]
+            self.verb_label.config(text=f"Verb: {self.verb}")
+            self.update_form_label()
 
     def add_verb(self):
         index = 0
@@ -168,7 +191,7 @@ class ConjugationWindow(tk.Toplevel):
             new_verbs[verb] = self.verbs[verb]
 
         self.verbs = new_verbs
-        self.set_random_verb()
+        self.set_random_verb(self.verbs, False)
 
     def get_verbs(self):
         fname = f"data/{self.filename}"

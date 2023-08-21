@@ -30,7 +30,8 @@ def write_to_file(form_index, filename, links,verb):
    f.close()
 
 def get_verbs():
-        fname = "../data/vocab_lists/verbos2.txt"
+        print("verbs")
+        fname = "../data/verbs2.txt"
         data = ""
 
         try:
@@ -58,12 +59,12 @@ def generate_verbs():
         
     verbs = get_verbs()
 
-    for line in verbs:
-        verb = line.split('=')
-        r = requests.get(f'https://www.conjugacao.com.br/{verb[0]}')
+    for verb in verbs:
+        # verb = line.split('=')
+        r = requests.get(f'https://www.conjugacao.com.br/{verb}')
         soup = BeautifulSoup(r.text.encode('utf-8'), 'html.parser')
         links = soup.findAll('span', class_='f')
-        verb = soup.find('h1', class_='nmt')
+        verb = soup.find('h1', class_='page-title')
         print(verb)
         verb = verb.text[6:].lower()
 
@@ -99,27 +100,28 @@ def generate_verbs():
 
     # write_to_file(8,"../data/futuro.txt",links,verb)
 
-    t1 = threading.Thread(target=write_to_file, args=(0,"../data/presente.txt",links,verb,))
-    t2 = threading.Thread(target=write_to_file, args=(1,"../data/pretimp.txt",links,verb,))
-    t3 = threading.Thread(target=write_to_file, args=(2,"../data/preperf.txt",links,verb,))
-    t4 = threading.Thread(target=write_to_file, args=(5,"../data/futpret.txt",links,verb,))
-    t5 = threading.Thread(target=write_to_file, args=(8,"../data/futuro.txt",links,verb,))
+    # t1 = threading.Thread(target=write_to_file, args=(0,"../data/presente.txt",links,verb,))
+    # t2 = threading.Thread(target=write_to_file, args=(1,"../data/pretimp.txt",links,verb,))
+    # t3 = threading.Thread(target=write_to_file, args=(2,"../data/preperf.txt",links,verb,))
+    # t4 = threading.Thread(target=write_to_file, args=(5,"../data/futpret.txt",links,verb,))
+    # t5 = threading.Thread(target=write_to_file, args=(8,"../data/futuro.txt",links,verb,))
 
-    t1.start()
-    t2.start()
-    t3.start()
-    t4.start()
-    t5.start()
-    t1.join()
-    t2.join()
-    t3.join()
-    t4.join()
-    t5.join()
+    # t1.start()
+    # t2.start()
+    # t3.start()
+    # t4.start()
+    # t5.start()
+    # t1.join()
+    # t2.join()
+    # t3.join()
+    # t4.join()
+    # t5.join()
 
     result = time.time() - start
     print(result)
 
 if __name__ == '__main__':
+    print("hello")
     generate_verbs()
    
 
